@@ -1,0 +1,18 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run chart-releaser
+      uses: helm/chart-releaser-action@v1.6.0
+      with:
+        charts_dir: config/flymanger
+      env:
+        CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
