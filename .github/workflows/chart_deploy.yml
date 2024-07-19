@@ -3,14 +3,9 @@ name: Helm Chart Publisher
 on:
   push:
     branches: [ "main" ]
-    paths:
-    - "config/**"
   pull_request:
     branches: [ "main" ]
-    paths:
-    - "config/**"
 
-  
 jobs:
   build:
     runs-on: ubuntu-latest
