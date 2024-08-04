@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import environ, os
 
+env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -72,18 +74,24 @@ WSGI_APPLICATION = 'flymanger.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+DB_NAME = env.str('DB_NAME')
+DB_HOST = env.str('DB_HOST')
+DB_PORT = env.int('DB_PORT')
+DB_USERNAME = env.str('DB_USERNAME')
+DB_PASSWORD = env.str('DB_PASSWORD')
+                      
 
 DATABASES = {
         'default': {
             'ENGINE': 'djongo',
-            'NAME': 'flymanager',
+            'NAME': DB_NAME,
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': 'localhost',
-                'port': 32000,
-                'username': 'adminuser',
-                'password': 'password123',
+                'host': DB_HOST,
+                'port': DB_PORT,
+                'username': DB_USERNAME,
+                'password': DB_PASSWORD,
             },
             'LOGGING': {
                 'version': 1,
