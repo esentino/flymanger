@@ -37,7 +37,7 @@ Common labels
 helm.sh/chart: {{ include "flymanger.chart" . }}
 {{ include "flymanger.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote | trunc 63}}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
