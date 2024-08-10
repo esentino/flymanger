@@ -3,6 +3,16 @@ entries:
   flymanger:
   - apiVersion: v2
     appVersion: main@sha256:4f976a01bf80c770e05782ffaaa1dc1c0dc81c45139e218b621a6b34079b95bd
+    created: "2024-08-10T22:53:45.72562212Z"
+    description: A Helm chart for Kubernetes
+    digest: 378118897fa477db749f83c7d675b440f93532119df4bc356d82c941a284604b
+    name: flymanger
+    type: application
+    urls:
+    - https://github.com/esentino/flymanger/releases/download/flymanger-0.1.4/flymanger-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: main@sha256:4f976a01bf80c770e05782ffaaa1dc1c0dc81c45139e218b621a6b34079b95bd
     created: "2024-08-10T22:45:13.513071595Z"
     description: A Helm chart for Kubernetes
     digest: 8eeb7a5a22d6fd862e11725eee72c2a695aaf63d7a1a203be691da27ba1c7db4
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/esentino/flymanger/releases/download/flymanger-0.1.2/flymanger-0.1.2.tgz
     version: 0.1.2
-generated: "2024-08-10T22:45:13.513077296Z"
+generated: "2024-08-10T22:53:45.725635435Z"
