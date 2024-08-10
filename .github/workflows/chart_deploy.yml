@@ -2,9 +2,9 @@ name: Helm Chart Publisher
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "chart" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "chart" ]
 
 jobs:
   build:
