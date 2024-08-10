@@ -14,4 +14,4 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1
 
-ENTRYPOINT [ "gunicorn", "--chdir", "/app", "flymanger.wsgi:application" ]
+ENTRYPOINT [ "gunicorn", "--chdir", "/app", "flymanger.wsgi:application", "-b", "0.0.0.0:8000" ]
