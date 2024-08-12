@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fly-pg-test-svc
+  labels:
+    app: fly-pg-test-svc
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      nodePort: 30433
+  selector:
+    app: fly-pg-test
