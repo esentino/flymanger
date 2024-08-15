@@ -1,3 +1,0 @@
-[submodule "mongodb"]
-	path = mongodb
-	url = https://github.com/techiescamp/kubernetes-mongodb.git
