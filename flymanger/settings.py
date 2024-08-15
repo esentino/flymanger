@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djongo',
 ]
 
 MIDDLEWARE = [
@@ -75,35 +74,38 @@ WSGI_APPLICATION = 'flymanger.wsgi.application'
 
 # Database
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 DB_NAME = env.str('DB_NAME')
 DB_HOST = env.str('DB_HOST')
 DB_PORT = env.int('DB_PORT')
 DB_USERNAME = env.str('DB_USERNAME')
 DB_PASSWORD = env.str('DB_PASSWORD')
-                      
+                    
+TEST_NAME = env.str('TEST_NAME')
+TEST_HOST = env.str('TEST_HOST')
+TEST_PORT = env.int('TEST_PORT')
+TEST_USERNAME = env.str('TEST_USERNAME')
+TEST_PASSWORD = env.str('TEST_PASSWORD')
+    
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': DB_NAME,
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host': DB_HOST,
-                'port': DB_PORT,
-                'username': DB_USERNAME,
-                'password': DB_PASSWORD,
-            },
-            'LOGGING': {
-                'version': 1,
-                'loggers': {
-                    'djongo': {
-                        'level': 'DEBUG',
-                        'propagate': False,                        
-                    }
-                },
-             },
-        }
+    "default": {
+        "HOST": DB_HOST,
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": DB_NAME,
+        "USER": DB_USERNAME,
+        "PASSWORD": DB_PASSWORD,
+        "PORT": DB_PORT,
+    },
+    "testing": {
+        "HOST": TEST_HOST,
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": TEST_NAME,
+        "USER": TEST_USERNAME,
+        "PASSWORD": TEST_PASSWORD,
+        "PORT": TEST_PORT,
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
