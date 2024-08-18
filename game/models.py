@@ -1,13 +1,16 @@
+from enum import Enum
+
 from django.db import models
 from django.contrib.auth.models import User
 
 
 class InvestModel(models.Model):
     invest_money = models.IntegerField()
-    income_bonus = models.IntegerField(verbose_name="bonus money per minute")
+    income_bonus = models.IntegerField(verbose_name="bonus income per minute")
 
     class Meta:
         abstract = True
+
 
 class UserData(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -30,7 +33,7 @@ class CargoImprovement(InvestModel):
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
 
 
-class PlainCargo(models.Model):
+class PlaneCargo(models.Model):
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
     plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
     count = models.IntegerField()
@@ -66,3 +69,36 @@ class UserCargoInvestment(models.Model):
 
     class Meta:
         unique_together = [["cargo", "user"]]
+
+
+class UserWarehouseImprovement(models.Model):
+    cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    invest_money = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = [["cargo", "user"]]
+
+
+class BonusType(str, Enum):
+    PACKING_TIME = 'packing_type'
+    INCOME_INCREASE = 'income_increase'
+
+
+BONUS_PLANE_CHOICES = (
+    (BonusType.PACKING_TIME, 'Packing Time reduction in seconds'),
+    (BonusType.INCOME_INCREASE, 'More money')
+)
+
+
+class PlaneImprovement(models.Model):
+    plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
+    done_plane = models.IntegerField()
+    bonus_type = models.CharField(choices=BONUS_PLANE_CHOICES)
+    bonus_value = models.IntegerField()
+
+
+class UserPlaneImprovement(models.Model):
+    plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
+    done_plane = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
