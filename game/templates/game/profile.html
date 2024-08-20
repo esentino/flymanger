@@ -1,0 +1,20 @@
+<div>
+    {% if user.is_authenticated %}
+    <div>Tutaj Profile</div>
+    {% else %}
+    <div>
+        <div>
+            <form>
+                {% csrf_token %}
+                {{ auth_form }}
+                <button type="submit">Zaloguj się :)</button>
+            </form>
+        </div>
+        <div>
+            <form hx-post="/register">
+                {% include 'game/_partial/register.html' %}
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
